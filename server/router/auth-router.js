@@ -1,16 +1,15 @@
 const express   = require("express");
 const router = express.Router();
-const {home}  = require("../controllers/auth-controller")
+
+//Alternative way written below: const {home,register}  = require("../controllers/auth-controller")
+const authcontrollers = require("../controllers/auth-controller")
+
+// Home Route : (Read Data)
+router.route("/").get(authcontrollers.home);
 
 
-
-router.route("/").get(home);
-
-
-
-router.route("/register").get((req,res)=>{
-    res.status(200).send('Welcome to the registeration')
-})
+// Register Route : adds data to database (Insert data)
+router.route("/register").post(authcontrollers.register)
 
 
 module.exports = router;
