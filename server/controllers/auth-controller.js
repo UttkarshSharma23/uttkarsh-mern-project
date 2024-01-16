@@ -5,7 +5,7 @@ const home = async (req, res) => {
     try {
         res
             .status(200)
-            .send("Welcome  uttkarsh")
+            .send("Welcome  uttkarsh to this auth-controller")
     } catch (error) {
         console.log(error);
     }
