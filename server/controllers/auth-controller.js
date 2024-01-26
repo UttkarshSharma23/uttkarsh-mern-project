@@ -2,7 +2,7 @@
 const User = require("../models/user-model")
 // to protect the password with proper hashed content
 const bcrypt = require("bcryptjs");
-const { use } = require("../router/auth-router");
+// const { use } = require("../router/auth-router");
 
 
 
@@ -88,14 +88,16 @@ const login = async (req, res) => {
         //reading the data first
        const {email,password} = req.body;
 
-    //    checking if the user Exist
-       const userExist = await  User.findOne({email});
+    //  checking if the user Exist
+    const userExist = await  User.findOne({email});
        
        if(!userExist){
         return res.status(400).json({message:"Invalid Credentails"})
        }
     // Password comparing with the registered user
-        const user = await bcrypt.compare(password,userExist.password);
+        //creating a function to compare this: const user = await bcrypt.compare(password,userExist.password);
+
+        const user = await userExist.comparePassword(password)
 
         if(user){
             res.status(200).json({
@@ -118,11 +120,11 @@ const login = async (req, res) => {
 
 
 /*
-*--------------------------------------Module Exports---------------------------------------------*
+*--------------------------------------Module Exports---------------------------------------------------------------------------------------------*
 Exporting all the logical functionalities with the help of module.exports:
 1.Home -> /
 2.Register -> /register
 3.Login -> /login
-*------------------------------------------------------------------------------------------------*
+*-------------------------------------------------------------------------------------------------------------------------------------------------*
 */
 module.exports = { home ,register,login}

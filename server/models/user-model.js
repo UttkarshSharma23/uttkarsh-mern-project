@@ -41,6 +41,10 @@ userSchema.pre('save', async function () {
         next(error)
     }
 })
+//Compare password , instance function
+userSchema.methods.comparePassword = async function(password){
+    return await bcrypt.compare(password,this.password);
+}
 
 /*
 JSON web Token
