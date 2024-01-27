@@ -17,7 +17,8 @@ app.get("/register",(req,res)=>{
 const express = require("express")
 const app = express();
 const router = require("./router/auth-router")
-const connectDb = require("./utils/db")
+const connectDb = require("./utils/db");
+const errorMiddleware = require("./middlewares/error-middleware");
 
 
 // MiddleWare: Application using json, important to place before any routes
@@ -25,7 +26,8 @@ app.use(express.json());
 // Mount the Router : To use the router in your main Express app we can mount it at specific URL prefix
 app.use("/api/auth", router)
 
-
+// error middleware needs to be added to handle all the errors by using a single file.
+app.use(errorMiddleware);
 
 app.get("/" , (req, res)=>
 {

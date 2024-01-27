@@ -7,6 +7,8 @@
 >>Synchronous methods: .parse(data:unknown)  
 
 the function will check the data which is passed by the user is eqaul to the schema defined or not
+
+>>Middleware error handling added so that we do not need to define error everytime manually.
 *-------------------------------------------------------------------------------------------------------------------------------------------------*
 */
 
@@ -16,10 +18,22 @@ const validate = (schema) => async(req,res,next) =>{
         req.body = parseBody;
         next();
     }
-    catch(err){
-        const message = err.errors[0].message
+
+    catch(err)
+    {
+        const status =422;
+        const message = "Fill the input properly"
+        const extraDetails= err.errors[0].message
+
+        const error = 
+        {
+            status,
+            message,
+            extraDetails,
+        }
         // console.log(message);
-        res.status(400).json({msg:message})
+// this is managed by error-middleware file : res.status(400).json({msg:message})
+        next(error);
     }
 }
 

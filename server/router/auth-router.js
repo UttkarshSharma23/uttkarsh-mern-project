@@ -7,7 +7,7 @@ const authcontrollers = require("../controllers/auth-controller")
 // signup zod schema
 const signupSchema = require("../validators/auth-validator")
 // validation middleware called
-const validate = required("../middlewares/valide-middleware")
+const validate = require("../middlewares/validate-middleware")
 
 // Home Route : (Read Data)
 router.route("/").get(authcontrollers.home);
@@ -17,7 +17,7 @@ router.route("/").get(authcontrollers.home);
 router.route("/register").post(validate(signupSchema), authcontrollers.register)
 
 
-// 
-router.route("/login").post(authcontrollers.login)
+// Login Route : get method used and validating it.
+router.route("/login").post(validate(signupSchema.loginSchema),authcontrollers.login)
 
 module.exports = router;
