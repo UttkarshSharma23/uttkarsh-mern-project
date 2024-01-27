@@ -16,7 +16,8 @@ app.get("/register",(req,res)=>{
 
 const express = require("express")
 const app = express();
-const router = require("./router/auth-router")
+const authRoute = require("./router/auth-router")
+const contactRoute = require("./router/contact-router")
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
@@ -24,7 +25,9 @@ const errorMiddleware = require("./middlewares/error-middleware");
 // MiddleWare: Application using json, important to place before any routes
 app.use(express.json());
 // Mount the Router : To use the router in your main Express app we can mount it at specific URL prefix
-app.use("/api/auth", router)
+app.use("/api/auth", authRoute);
+// Contact form route 
+app.use("/api/form",contactRoute);
 
 // error middleware needs to be added to handle all the errors by using a single file.
 app.use(errorMiddleware);
