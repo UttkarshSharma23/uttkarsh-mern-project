@@ -46,15 +46,15 @@ const handleSubmit = (e)=> {
   return (
     <>
     <main>
-      <div className="section-registeration">
+      <div className="section-registration">
         <div className="container grid grid-two-cols">
-          <div className="registeration-image">
-            <img src={register} alt="registeration process" width="500" height="500" />
+          <div className="registration-image">
+            <img src={register} alt="registration process" width="500" height="500" />
           </div>
 
           {/* Registeration Form */}
-          <div className="registeration-form">
-            <h1 className='main-heading mb-3'>Login</h1>
+          <div className="registration-form">
+            <h1 className="main-heading mb-3">Login</h1>
             <br />
 
 
